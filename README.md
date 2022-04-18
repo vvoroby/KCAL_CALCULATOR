@@ -17,7 +17,7 @@ title=Label(frame, text="<дата>", bg="white", font=70)
 title.pack()
 btn = Button(frame,text = 'Кнопка', bg="pink",font=70)
 btn.pack()
-
+#не работает Combobox
 combo = Combobox(window)  
 combo['дата'] = (1, 2, 3, 4, 5, 'Текст')
 combo.grid(column=0, row=0)
