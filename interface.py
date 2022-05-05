@@ -1,5 +1,11 @@
+import matplotlib.figure
+import matplotlib.patches
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 from tkinter import ttk
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 
 # Окно при нажатии на кнопку завтрак
 def breafest():
@@ -558,11 +564,36 @@ title.grid(column=0, row=6)
 # btn.grid(column=1, row=8)
 
 # сводка (ДОБАВИТЬ ВИДЖЕТЫ)
-title=Label(window, text="СВОДКА", bg="white", fg ="indigo", font=70, width=30, height=10, anchor = 'n')
-title.grid(column=0, row=7)
+#title=Label(window, text="СВОДКА", bg="white", fg ="indigo", font=70, width=30, height=10, anchor = 'n')
+#title.grid(column=0, row=7)
 
-title=Label(window, bg = "lavender", font=70, width=30 )
-title.grid(column=0, row=8)
+#title=Label(window, bg = "lavender", font=70, width=30 )
+#title.grid(column=0, row=8)
+
+#диаграмма для сводки
+fig = matplotlib.figure.Figure(figsize=(5,5))
+ax = fig.add_subplot(111)
+ax.set_title('CВОДКА')
+colors = ("lightcoral", "yellowgreen")
+#labels = ['Съедено','Осталось']
+#данные для примера
+ax.pie([20,80],colors = colors,
+       #labels=labels,
+       wedgeprops=dict(width=0.5),
+       autopct='%1.1f%%') 
+ax.legend(['Съедено',
+          'Осталось'])
+circle=matplotlib.patches.Circle( (0,0), 0.3, color='white')
+ax.add_artist(circle)
+ax.axis('equal')
+canvas = FigureCanvasTkAgg(fig, master=window)
+canvas.get_tk_widget().grid(column=0, row=7)
+canvas.draw()
+
+#текст внутри диаграммы
+title=Label(window,text='''съедено:500ккал
+осталось:1200ккал''',font=("Courier", 10, "roman"), bg="white" )
+title.grid(column=0, row=7)
 
 # кнопка СОХРАНЕНИЯ и выхода
 btn = Button(window, text="Закрыть окно", bg="pink", relief=RAISED, bd = 6, command=window.quit)
