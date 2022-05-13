@@ -6,8 +6,115 @@ from tkinter import ttk
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from tkinter.ttk import Radiobutton
+from tkinter.ttk import Combobox
 
-# Окно при нажатии на кнопку завтрак
+
+def kcal_calculator():
+    # Функция для подсчета нормы ккал, исходя из физических нагрузок
+
+    def calculeter():
+        if my_activiti.get() == "Физическая нагрузка отсутствует или минимальная":
+            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.2))
+        elif my_activiti.get() == "Тренировки средней тяжести 2-3 раза в неделю":
+            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.38))
+        elif my_activiti.get() == "Тренировки средней тяжести 4-5 раз в неделю":
+            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.46))
+        elif my_activiti.get() == "Тренировки каждый день":
+            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.64))
+        elif my_activiti.get() == "Ежедневная физическая нагрузка + физическая работа":
+            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
+
+    window = Tk()
+    window.title('Расчет нормы калорий')
+    window.geometry("300x350")
+    window['bg'] = 'lavender'
+
+    label = Label(text="Введите свои личные данные", bg="lavender")
+    label.pack(pady=5)
+
+    # Создаем переменные
+    my_height = IntVar()
+    my_weight = IntVar()
+    my_age = IntVar()
+    my_gender = IntVar()
+    my_activiti = StringVar()
+    ckal = IntVar()
+
+    # Блок невидимых рамок для красивого интерфейса
+    f_1 = Frame(window)
+    f_2 = Frame(window)
+    f_3 = Frame(window)
+    f_4 = Frame(window)
+    f_5 = Frame(window)
+    f_6 = Frame(window)
+
+    # Ввод данных
+    height_label = Label(f_1, text="Рост ", bg="lavender")
+    height_entry = Entry(f_1, width=8, textvariable=my_height)
+    height2_label = Label(f_1, text="см ", bg="lavender")
+
+    weight_label = Label(f_2, text="Вес ", bg="lavender")
+    weight_entry = Entry(f_2, width=8, textvariable=my_weight)
+    weight2_label = Label(f_2, text="кг ", bg="lavender")
+
+    age_label = Label(f_3, text="Возраст ", bg="lavender")
+    age_entry = Entry(f_3, width=8, textvariable=my_age)
+
+    gender_label = Label(f_4, text="Пол ", bg="lavender")
+    rad1 = Radiobutton(f_4, text='М', value=4, variable=my_gender)
+    rad2 = Radiobutton(f_4, text='Ж', value=-161, variable=my_gender)
+
+    activiti_label = Label(f_5, text="Активность ", bg="lavender")
+    activiti = Combobox(f_5, textvariable=my_activiti, width=48,
+                        values=["Физическая нагрузка отсутствует или минимальная",
+                                "Тренировки средней тяжести 2-3 раза в неделю",
+                                "Тренировки средней тяжести 4-5 раз в неделю",
+                                "Тренировки каждый день",
+                                "Ежедневная физическая нагрузка + физическая работа"])
+
+    ckal_label1 = Label(f_6, text="Ваша норма: ", bg="lavender")
+    ckal_label2 = Label(f_6, textvariable=ckal, bg="lavender")
+    ckal_label3 = Label(f_6, text="ккал ", bg="lavender")
+
+    message_button = Button(text="Узнать", bg="pink", command=calculeter)
+
+    # Упорядочивание элементов окна
+    f_1.pack(pady=5)
+    f_2.pack(pady=5)
+    f_3.pack(pady=5)
+    f_4.pack(pady=5)
+    f_5.pack(pady=5)
+    message_button.pack(pady=5)
+    f_6.pack(pady=5)
+
+    height_label.pack(side=LEFT)
+    weight_label.pack(side=LEFT)
+    age_label.pack(side=LEFT)
+    gender_label.pack(side=LEFT)
+    activiti_label.pack(side=LEFT)
+    ckal_label1.pack(side=LEFT)
+
+    height_entry.pack(side=LEFT)
+    height2_label.pack(side=LEFT)
+    weight_entry.pack(side=LEFT)
+    weight2_label.pack(side=LEFT)
+    age_entry.pack(side=LEFT)
+    rad1.pack(side=LEFT)
+    rad2.pack(side=LEFT)
+    activiti.pack(side=LEFT)
+    ckal_label2.pack(side=LEFT)
+    ckal_label3.pack(side=LEFT)
+
+    btn = Button(window, text="Сохранить", bg="pink", command=window.quit)
+    btn.pack(pady=30, side=TOP)
+
+    window.mainloop()
+
+    return ckal
+
+
+# Таблица при нажатии на кнопку завтрак
 def breafest():
     window = Tk()
     window.title("Завтрак")
@@ -132,10 +239,10 @@ def breafest():
     add_button.pack(pady=5)
 
     window.mainloop()
-            
-            
 
-# Окно при нажатии на кнопку обед
+
+
+# Таблица при нажатии на кнопку обед
 def lunch():
     window = Tk()
     window.title("Обед")
@@ -259,11 +366,11 @@ def lunch():
                         )
     add_button.pack(pady=5)
 
-    window.mainloop()            
-            
-            
-            
-# Окно при нажатии на кнопку ужин
+    window.mainloop()
+
+
+
+# Таблица при нажатии на кнопку ужин
 def dinner():
     window = Tk()
     window.title("Ужин")
@@ -388,10 +495,10 @@ def dinner():
     add_button.pack(pady=5)
 
     window.mainloop()
-            
-            
-            
-# Окно при нажатии на кнопку перекус
+
+
+
+# Таблица при нажатии на кнопку перекус
 def snack():
     window = Tk()
     window.title("Перекус")
@@ -499,104 +606,90 @@ def snack():
     # def add_record():
 
     # Кнопки
-    select_button = Button(window, text="Выбрать"  ##command=select_record
+    select_button = Button(window, text="Выбрать"  ##command=select_record)
                            )
     select_button.pack(pady=5)
 
-    refresh_button = Button(window, text="Заменить"  ##command=update_record
+    refresh_button = Button(window, text="Заменить"  ##command=update_record)
                             )
     refresh_button.pack(pady=5)
 
-    delete_button = Button(window, text="Удалить"  ##command=delete_record
+    delete_button = Button(window, text="Удалить"  ##command=delete_record)
                            )
     delete_button.pack(pady=5)
 
-    add_button = Button(window, text="Добавить"  ##command=add_record
+    add_button = Button(window, text="Добавить"  ##command=add_record)
                         )
     add_button.pack(pady=5)
 
     window.mainloop()
-            
-            
-# Главное окно
+
+
+# вызов окна с рачсетом нормы ккал и сохранение нормы
+ckal = str(kcal_calculator())
+
 window = Tk()
 
-#иконка приложения (ЗАГРУЗИТЬ ИЗОБРАЖЕНИЕ)
+#иконка приложения
 # photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
 # window.iconphoto(False, photo)
 
 window.title("Приложение :'Подсчёт калорий'")
 window.geometry('350x620')
-window['bg'] = 'lavender'
+window['bg'] = 'Lavender'
 
-# ЗДЕСЬ ДОЛЖЕН БЫТЬ КАЛЕНДАРЬ И ВЫБОР ДАТЫ
-title = Label(window, text="Сегодня", bg = "lavender", fg ="indigo", font=70, width=30)
-title.grid(column=0, row=0)
-
-title=Label(window, bg = "lavender", font=70, width=30)
-title.grid(column=0, row=1)
+#здесь должен быть календарь и выбор даты
+title = Label(window, text="Сегодня", bg="Lavender", fg ="indigo", font=70, width=30)
+title.pack(pady=3, side=TOP)
 
 # кнопка выбора завтрака
 btn = Button(window, text ='Завтрак', bg="Linen", fg ='SandyBrown', font=90, width=30, height=1, relief=RAISED, bd=6, command = breafest)
-btn.grid(column=0, row=2)
+btn.pack(pady=3, side=TOP)
 
 # кнопка выбоа обеда
 btn = Button(window, text="Обед", bg="Honeydew", fg ="DarkSeaGreen", font=70, width=30, height=1, relief=RAISED, bd=6, command = lunch)
-btn.grid(column=0, row=3)
+btn.pack(pady=2, side=TOP)
 
 # кнопка выбора ужина
 btn = Button(window, text="Ужин", bg="AliceBlue", fg ="CornflowerBlue", font=70, width=30, height=1, relief=RAISED, bd=6, command = dinner)
-btn.grid(column=0, row=4)
+btn.pack(pady=2, side=TOP)
 
 # кнопка выбора перекуса
 btn = Button(window, text="Перекус", bg="MistyRose", fg ="PaleVioletRed", font=70, width=30, height=1, relief=RAISED, bd=6, command = snack)
-btn.grid(column=0, row=5)
+btn.pack(pady=2, side=TOP)
 
-title=Label(window, bg = "lavender", font=70, width=30 )
-title.grid(column=0, row=6)
+# вода
+# btn = Button(window, text="Вода", bg="lightcyan", fg ="indigo", font=70, width=30, height=1, relief=RAISED, bd=6)
+# btn.pack(pady=3, side=TOP)
 
-# # вода
-# title=Label(window, text="Вода",bg="lightcyan",fg ="indigo",font=70,width=30 )
-# title.grid(column=0, row=8)
-# btn = Button(window,text = '+', bg="pink",font=20,width=4,height = 1,
-#             relief=RAISED,
-#             bd=6)
-# btn.grid(column=1, row=8)
-
-# сводка (ДОБАВИТЬ ВИДЖЕТЫ)
-#title=Label(window, text="СВОДКА", bg="white", fg ="indigo", font=70, width=30, height=10, anchor = 'n')
-#title.grid(column=0, row=7)
-
-#title=Label(window, bg = "lavender", font=70, width=30 )
-#title.grid(column=0, row=8)
+# title=Label(window, text="сводка", bg="Lavender", fg ="indigo", font=70, width=30, height=1)
+# title.pack(pady=3)
 
 #диаграмма для сводки
-fig = matplotlib.figure.Figure(figsize=(5,5))
+fig = matplotlib.figure.Figure(figsize=(4,3), facecolor="Lavender")
 ax = fig.add_subplot(111)
-ax.set_title('CВОДКА')
-colors = ("lightcoral", "yellowgreen")
 #labels = ['Съедено','Осталось']
 #данные для примера
-ax.pie([20,80],colors = colors,
+ax.pie([20,80], colors = ("lightcoral", "yellowgreen"),
        #labels=labels,
        wedgeprops=dict(width=0.5),
-       autopct='%1.1f%%') 
-ax.legend(['Съедено',
-          'Осталось'])
-circle=matplotlib.patches.Circle( (0,0), 0.3, color='white')
+       autopct='%1.1f%%')
+ax.legend(['Съедено: 500 kcal',
+          'Осталось: 1200 kcal'])
+circle=matplotlib.patches.Circle((0,0), 0.3, color='lavender')
 ax.add_artist(circle)
 ax.axis('equal')
 canvas = FigureCanvasTkAgg(fig, master=window)
-canvas.get_tk_widget().grid(column=0, row=7)
+canvas.get_tk_widget().pack()
 canvas.draw()
 
-#текст внутри диаграммы
-title=Label(window,text='''съедено:500ккал
-осталось:1200ккал''',font=("Courier", 10, "roman"), bg="white" )
-title.grid(column=0, row=7)
+#текст внутри диаграммы (grid)
+# title=Label(window,text='''съедено:500ккал
+# осталось:1200ккал''',font=("Courier", 10, "roman"), bg="white" )
+# title.pack()
 
 # кнопка СОХРАНЕНИЯ и выхода
 btn = Button(window, text="Закрыть окно", bg="pink", relief=RAISED, bd = 6, command=window.quit)
-btn.grid(column=0, row=9)
+btn.pack(side=TOP)
 
 window.mainloop()
