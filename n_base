@@ -1,1 +1,21 @@
+import sqlite3
 
+#соединение с базой данных
+conn =sqlite3.connect('n_base.db')
+cur =conn.cursor()
+cur.execute('''CREATE TABLE IF NOT EXISTS n_base (name TEXT,g INT,kkal INT,p INT,f INT ,c INT)''')
+sql = 'INSERT INTO n_base (name,g ,kkal ,p ,f  ,c ) values(?, ?, ?, ? ,?, ?)'
+#проверка работы ,вывод данных с условием
+with conn:
+    data = conn.execute("SELECT * FROM n_base WHERE kkal >=350")
+    for row in data:
+        print(row)
+        
+head_rows = cur.fetchmany(size=2)
+print(head_rows)
+#добавление данных в базу данных
+cur.execute('''INSERT INTO n_base VALUES('Shake',67,78,7,7,9)''')
+conn.commit()
+       
+
+conn.close()
