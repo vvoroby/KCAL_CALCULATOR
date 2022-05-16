@@ -1,13 +1,5 @@
-import matplotlib.figure
-import matplotlib.patches
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 from tkinter import ttk
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-from tkinter.ttk import Radiobutton
-from tkinter.ttk import Combobox
 import sqlite3
 
 #кнопка вывода данных
@@ -17,6 +9,8 @@ def add_product():
     cursor.execute("SELECT * FROM n_base WHERE name = ?", [my_product.get()]) ##Делаем SELECT запрос к базе данных, используя обычный SQL-синтаксис
     my_frame.insert(parent='', index='end', values=cursor.fetchone())
     my_frame.pack()
+    new_product_entry.delete(0, END) ##очищает окно ввода
+    new_mass_entry.delete(0, END)
     connect.close() ##закрываем соединение с базой данных
 
 # def delete_product():
