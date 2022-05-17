@@ -4,14 +4,28 @@ import sqlite3
 
 #кнопка вывода данных
 def add_product():
-    connect = sqlite3.connect('n_base.db')
-    cursor = connect.cursor() ## Создаем курсор - это специальный объект который делает запросы и получает их результаты
-    cursor.execute("SELECT * FROM n_base WHERE name = ?", [my_product.get()]) ##Делаем SELECT запрос к базе данных, используя обычный SQL-синтаксис
-    my_frame.insert(parent='', index='end', values=cursor.fetchone())
+    def calculation(items):
+        new = []
+        for item in enumerate(items):
+            if item[0] == 0:
+                new.append(item[1])
+            else:
+                new.append(item[1] * my_mass.get() / 100)
+
+        return tuple(new)
+
+    connect = sqlite3.connect('n_base.db') ##делаем запрос к базе данных
+    cursor = connect.cursor()
+    cursor.execute("SELECT * FROM n_base WHERE name = ?", [my_product.get()])
+    items = cursor.fetchone()
+    connect.close()
+
+    my_frame.insert(parent='', index='end', values=calculation(items)) ##записываем значение в визуальную таблицу
     my_frame.pack()
-    new_product_entry.delete(0, END) ##очищает окно ввода
+
+    new_product_entry.delete(0, END)  ##очищает окно ввода
     new_mass_entry.delete(0, END)
-    connect.close() ##закрываем соединение с базой данных
+
 
 # def delete_product():
 
