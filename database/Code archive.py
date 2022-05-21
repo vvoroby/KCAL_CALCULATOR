@@ -110,13 +110,13 @@ my_frame.column("#5", anchor=CENTER, width=80)
 my_frame.column("#6", anchor=CENTER, width=80)
 
 # заголовки колонок
-tree.heading("#0", text="", anchor=CENTER)
-tree.heading("#1", text="name product", anchor=CENTER)
-tree.heading("#2", text="mass", anchor=CENTER)
-tree.heading("#3", text="kcal", anchor=CENTER)
-tree.heading("#4", text="p", anchor=CENTER)
-tree.heading("#5", text="f", anchor=CENTER)
-tree.heading("#6", text="c", anchor=CENTER)
+my_frame.heading("#0", text="", anchor=CENTER)
+my_frame.heading("#1", text="name product", anchor=CENTER)
+my_frame.heading("#2", text="mass", anchor=CENTER)
+my_frame.heading("#3", text="kcal", anchor=CENTER)
+my_frame.heading("#4", text="p", anchor=CENTER)
+my_frame.heading("#5", text="f", anchor=CENTER)
+my_frame.heading("#6", text="c", anchor=CENTER)
 
 # таблица для добавления данных
 low_frame = Frame(window)
