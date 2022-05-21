@@ -139,10 +139,10 @@ new_product_entry.grid(row=1, column=0)
 new_mass_entry = Entry(low_frame, textvariable=my_mass)
 new_mass_entry.grid(row=1, column=1)
 
-b2 = Button(text="Добавить данные", command=add_data)
+b2 = Button(text="Добавить ", command=add_product)
 b2.pack(pady=5)
 
-b3 = Button(text="Удалить данные", command=delete_data)
+b3 = Button(text="Удалить ", command=delete_product)
 b3.pack(pady=5)
 
 btn = Button(window, text="Закрыть", bg="pink", relief=RAISED, bd = 1, command=window.destroy)
