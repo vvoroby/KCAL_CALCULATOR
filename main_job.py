@@ -8,8 +8,10 @@ from tkinter.ttk import Radiobutton
 from tkinter.ttk import Combobox
 from datetime import date
 
+global ckal
 # Окно при запуске приложения и вычислении его нормы ккал
 def ckal_calculator():
+    global ckal
     # функция для подсчета нормы ккал, исходя из физических нагрузок
     def calculeter():
         if my_activiti.get() == "Физическая нагрузка отсутствует или минимальная":
@@ -662,7 +664,7 @@ def snack():
 
 
 # вызов окна с рачсетом нормы ккал и сохранение нормы
-ckal = str(ckal_calculator())
+ckal = ckal_calculator()
 
 window = Tk()
 
@@ -710,8 +712,8 @@ ax.pie([20,80], colors = ("lightcoral", "yellowgreen"),
        #labels=labels,
        wedgeprops=dict(width=0.5),
        autopct='%1.1f%%')
-ax.legend([f"Съедено: {ckal} kcal",
-          f"Осталось: {ckal} kcal"])
+ax.legend(['Съедено: kcal',
+          f"Осталось: {ckal.get()} kcal"])
 circle=matplotlib.patches.Circle((0,0), 0.3, color='lavender')
 ax.add_artist(circle)
 ax.axis('equal')
