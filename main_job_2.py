@@ -132,10 +132,6 @@ def ckal_calculator():
 
     return ckal
 
-# Функция для поиска нынешней даты
-def find_today():
-    return date.today().strftime("%d.%m.%Y")
-
 # Таблица при нажатии на кнопку архив
 def archive():
     window = Tk()
