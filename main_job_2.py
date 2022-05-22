@@ -9,6 +9,21 @@ from tkinter.ttk import Combobox
 from datetime import date
 from functools import partial
 
+# Функция для поиска нынешней даты
+def find_today():
+    return date.today().strftime("%d.%m.%Y")
+
+#функция для подсчета общего числа калорий     
+def summ():
+    connect = sqlite3.connect('archive.db')
+    cursor = connect.cursor()
+    cursor.execute('''SELECT kkal FROM archive WHERE date = ?''', [find_today()])
+    items=cursor.fetchall()
+    summa=0
+    for item in items:
+        summa += item[0]
+    connect.close()
+    return summa   
 
 # Окно при запуске приложения и вычислении его нормы ккал
 def ckal_calculator():
@@ -383,25 +398,18 @@ btn.pack(pady=2, side=TOP)
 #диаграмма для сводки
 fig = matplotlib.figure.Figure(figsize=(4,3), facecolor="Lavender")
 ax = fig.add_subplot(111)
-#labels = ['Съедено','Осталось']
-#данные для примера
-ax.pie([20,80], colors = ("lightcoral", "yellowgreen"),
-       #labels=labels,
+
+ax.pie([summ(),ckal.get()-summ()], colors = ("lightcoral", "yellowgreen"),
        wedgeprops=dict(width=0.5),
        autopct='%1.1f%%')
-ax.legend(['Съедено: kcal',
-          f"Осталось: {ckal.get()} kcal"])
+ax.legend([f"Съедено:{summ()} kcal",
+          f"Осталось: {ckal.get()-summ()} kcal"])
 circle=matplotlib.patches.Circle((0,0), 0.3, color='lavender')
 ax.add_artist(circle)
 ax.axis('equal')
 canvas = FigureCanvasTkAgg(fig, master=window)
 canvas.get_tk_widget().pack()
 canvas.draw()
-
-#текст внутри диаграммы (grid)
-# title=Label(window,text='''съедено:500ккал
-# осталось:1200ккал''',font=("Courier", 10, "roman"), bg="white" )
-# title.pack()
 
 # кнопка СОХРАНЕНИЯ и выхода
 btn = Button(window, text="Закрыть", bg="Pink", fg="HotPink4", relief=RAISED, bd = 1, command=window.destroy)
