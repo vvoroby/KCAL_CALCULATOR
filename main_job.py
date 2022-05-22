@@ -11,7 +11,7 @@ from tkinter.ttk import Combobox
 
 
 def kcal_calculator():
-    # Функция для подсчета нормы ккал, исходя из физических нагрузок
+    # функция для подсчета нормы ккал, исходя из физических нагрузок
 
     def calculeter():
         if my_activiti.get() == "Физическая нагрузка отсутствует или минимальная":
@@ -23,8 +23,9 @@ def kcal_calculator():
         elif my_activiti.get() == "Тренировки каждый день":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.64))
         elif my_activiti.get() == "Ежедневная физическая нагрузка + физическая работа":
-            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
-
+            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9)) 
+    
+    #окошко расчёта калорий
     window = Tk()
     window.title('Расчет нормы калорий')
     window.geometry("300x350")
@@ -33,7 +34,7 @@ def kcal_calculator():
     label = Label(text="Введите свои личные данные", bg="lavender")
     label.pack(pady=5)
 
-    # Создаем переменные
+    # создаем переменные
     my_height = IntVar()
     my_weight = IntVar()
     my_age = IntVar()
@@ -41,7 +42,7 @@ def kcal_calculator():
     my_activiti = StringVar()
     ckal = IntVar()
 
-    # Блок невидимых рамок для красивого интерфейса
+    # блок невидимых рамок для красивого интерфейса
     f_1 = Frame(window)
     f_2 = Frame(window)
     f_3 = Frame(window)
@@ -49,7 +50,7 @@ def kcal_calculator():
     f_5 = Frame(window)
     f_6 = Frame(window)
 
-    # Ввод данных
+    # ввод данных
     height_label = Label(f_1, text="Рост ", bg="lavender")
     height_entry = Entry(f_1, width=8, textvariable=my_height)
     height2_label = Label(f_1, text="см ", bg="lavender")
@@ -73,13 +74,14 @@ def kcal_calculator():
                                 "Тренировки каждый день",
                                 "Ежедневная физическая нагрузка + физическая работа"])
 
+    #вывод данных
     ckal_label1 = Label(f_6, text="Ваша норма: ", bg="lavender")
     ckal_label2 = Label(f_6, textvariable=ckal, bg="lavender")
     ckal_label3 = Label(f_6, text="ккал ", bg="lavender")
 
     message_button = Button(text="Узнать", bg="pink", command=calculeter)
 
-    # Упорядочивание элементов окна
+    # упорядочивание элементов окна
     f_1.pack(pady=5)
     f_2.pack(pady=5)
     f_3.pack(pady=5)
@@ -114,7 +116,7 @@ def kcal_calculator():
     return ckal
 
 
-# Таблица при нажатии на кнопку завтрак
+# таблица при нажатии на кнопку завтрак
 def breafest():
     window = Tk()
     window.title("Завтрак")
@@ -189,7 +191,7 @@ def breafest():
     new_mass_entry = Entry(frame)
     new_mass_entry.grid(row=1, column=1)
 
-    # Блок функций
+# блок функций
 
     # выбрать запись
     def select_record():
@@ -221,7 +223,7 @@ def breafest():
 
     # def add_record():
 
-    # Кнопки
+    # кнопки
     select_button = Button(window, text="Выбрать"  ##command=select_record)
                            )
     select_button.pack(pady=5)
@@ -242,7 +244,7 @@ def breafest():
 
 
 
-# Таблица при нажатии на кнопку обед
+# таблица при нажатии на кнопку обед
 def lunch():
     window = Tk()
     window.title("Обед")
@@ -317,7 +319,7 @@ def lunch():
     new_mass_entry = Entry(frame)
     new_mass_entry.grid(row=1, column=1)
 
-    # Блок функций
+    # блок функций
 
     # выбрать запись
     def select_record():
@@ -349,7 +351,7 @@ def lunch():
 
     # def add_record():
 
-    # Кнопки
+    # кнопки
     select_button = Button(window, text="Выбрать"  ##command=select_record)
                            )
     select_button.pack(pady=5)
@@ -370,7 +372,7 @@ def lunch():
 
 
 
-# Таблица при нажатии на кнопку ужин
+# таблица при нажатии на кнопку ужин
 def dinner():
     window = Tk()
     window.title("Ужин")
@@ -445,7 +447,7 @@ def dinner():
     new_mass_entry = Entry(frame)
     new_mass_entry.grid(row=1, column=1)
 
-    # Блок функций
+    # блок функций
 
     # выбрать запись
     def select_record():
@@ -477,7 +479,7 @@ def dinner():
 
     # def add_record():
 
-    # Кнопки
+    # кнопки
     select_button = Button(window, text="Выбрать"  ##command=select_record)
                            )
     select_button.pack(pady=5)
@@ -498,7 +500,7 @@ def dinner():
 
 
 
-# Таблица при нажатии на кнопку перекус
+# таблица при нажатии на кнопку перекус
 def snack():
     window = Tk()
     window.title("Перекус")
@@ -573,7 +575,7 @@ def snack():
     new_mass_entry = Entry(frame)
     new_mass_entry.grid(row=1, column=1)
 
-    # Блок функций
+    # блок функций
 
     # выбрать запись
     def select_record():
@@ -605,7 +607,7 @@ def snack():
 
     # def add_record():
 
-    # Кнопки
+    # кнопки
     select_button = Button(window, text="Выбрать"  ##command=select_record)
                            )
     select_button.pack(pady=5)
@@ -631,8 +633,8 @@ ckal = str(kcal_calculator())
 window = Tk()
 
 #иконка приложения
-# photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
-# window.iconphoto(False, photo)
+photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
+window.iconphoto(False, photo)
 
 window.title("Приложение :'Подсчёт калорий'")
 window.geometry('350x620')
@@ -658,20 +660,12 @@ btn.pack(pady=2, side=TOP)
 btn = Button(window, text="Перекус", bg="MistyRose", fg ="PaleVioletRed", font=70, width=30, height=1, relief=RAISED, bd=6, command = snack)
 btn.pack(pady=2, side=TOP)
 
-# вода
-# btn = Button(window, text="Вода", bg="lightcyan", fg ="indigo", font=70, width=30, height=1, relief=RAISED, bd=6)
-# btn.pack(pady=3, side=TOP)
-
-# title=Label(window, text="сводка", bg="Lavender", fg ="indigo", font=70, width=30, height=1)
-# title.pack(pady=3)
-
 #диаграмма для сводки
 fig = matplotlib.figure.Figure(figsize=(4,3), facecolor="Lavender")
 ax = fig.add_subplot(111)
-#labels = ['Съедено','Осталось']
+
 #данные для примера
 ax.pie([20,80], colors = ("lightcoral", "yellowgreen"),
-       #labels=labels,
        wedgeprops=dict(width=0.5),
        autopct='%1.1f%%')
 ax.legend(['Съедено: 500 kcal',
@@ -683,13 +677,8 @@ canvas = FigureCanvasTkAgg(fig, master=window)
 canvas.get_tk_widget().pack()
 canvas.draw()
 
-#текст внутри диаграммы (grid)
-# title=Label(window,text='''съедено:500ккал
-# осталось:1200ккал''',font=("Courier", 10, "roman"), bg="white" )
-# title.pack()
-
 # кнопка СОХРАНЕНИЯ и выхода
-btn = Button(window, text="Закрыть окно", bg="pink", relief=RAISED, bd = 6, command=window.quit)
+btn = Button(window, text="Закрыть окно", bg="pink", relief=RAISED, bd = 6, command=window.destroy)
 btn.pack(side=TOP)
 
 window.mainloop()
