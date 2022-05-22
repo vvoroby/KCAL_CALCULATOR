@@ -134,6 +134,19 @@ def ckal_calculator():
 
 # Таблица при нажатии на кнопку архив
 def archive():
+    def find_product_from_day():
+        my_frame.delete(*my_frame.get_children()) ##очищает таблицу
+
+        connect = sqlite3.connect('archive.db')  ##делаем запрос к базе данных
+        cursor = connect.cursor()
+        cursor.execute('''SELECT meal,name,g,kkal,p,f,c  FROM archive WHERE date = ?''', [my_date.get()])
+        all_products = cursor.fetchall()
+        connect.close()
+        print(all_products)
+        for item in all_products:
+            my_frame.insert(parent='', index='end', values=item)
+            my_frame.pack()
+
     window = Tk()
     window.title("Archive")
     window.geometry('350x620')
@@ -146,13 +159,12 @@ def archive():
 
     frame = Frame(window)
     date_label = Label(frame, text="Дата ", bg="lavender")
-    date_entry = Entry(frame, width=8, textvariable=my_date)
+    date_entry = Entry(frame, width=10, textvariable=my_date)
     date_label.pack(side=LEFT)
     date_entry.pack(side=RIGHT)
     frame.pack(pady=5)
 
-    message_button = Button(window, text="Узнать", bg="pink"  ##, command=calculeter)
-                            )
+    message_button = Button(window, text="Узнать", bg="pink", command=find_product_from_day)
     message_button.pack(pady=15)
 
     # Таьлица
@@ -205,26 +217,38 @@ def archive():
 # Окна
 def windows(meal, bg_color, fg_color):
     # калькулятор расчета кбжу по массе
-    global calculated_selected_product
-
     def calculation(selected_products):
-        global calculated_selected_product
         calculated_selected_product = []
-        for item in enumerate(selected_products):
-            if item[0] == 0:
-                calculated_selected_product.append(item[1])
+        for item in selected_products:
+            if type(item) == str:
+                calculated_selected_product.append(item)
             else:
-                calculated_selected_product.append(item[1] * my_mass.get() / 100)
-
+                calculated_selected_product.append(item * my_mass.get() / 100)
         return tuple(calculated_selected_product)
 
-    # Записываем значение в базу данных
-    def add_product_in_archive(selected_products):
+    def add_product():
+        connect = sqlite3.connect('n_base.db')  ##делаем запрос к базе данных
+        cursor = connect.cursor()
+        cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [my_product.get().title()])
+        calculated_selected_product = calculation(cursor.fetchone())
+        connect.close()
+
+        # записываем значение в таблицу
+        my_frame.insert(parent='', index='end', values=calculated_selected_product)
+        my_frame.pack()
+
+        new_product_entry.delete(0, END)  ##очищает окно ввода
+        new_mass_entry.delete(0, END)
+
+        add_product_to_base(calculated_selected_product)
+
+    def add_product_to_base(calculated_selected_product):
+        # добавить запись в базу данных
         added_calculated_selected_product = []
         added_calculated_selected_product.append(find_today())
-        added_calculated_selected_product.append(meal)
-        for item in enumerate(calculated_selected_product):
-            added_calculated_selected_product.append(item[1])
+        added_calculated_selected_product.append('breakfast')
+        for item in calculated_selected_product:
+            added_calculated_selected_product.append(item)
 
         connect = sqlite3.connect('archive.db')
         cursor = connect.cursor()
@@ -232,32 +256,6 @@ def windows(meal, bg_color, fg_color):
                        tuple(added_calculated_selected_product))
         connect.commit()
         connect.close()
-
-    # удаление продукта из архива
-    def delete_product_in_archive(deleted_archive_product):
-        print(deleted_archive_product[0])
-        connect = sqlite3.connect('archive.db')
-        cursor = connect.cursor()
-        cursor.execute("DELETE FROM archive WHERE name = ?", [deleted_archive_product[0]])
-        connect.commit()
-        connect.close()
-
-    def add_product():
-        connect = sqlite3.connect('n_base.db')  ##делаем запрос к базе данных
-        cursor = connect.cursor()
-        cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [my_product.get().title()])
-        selected_products = cursor.fetchone()
-        connect.close()
-
-        # записываем значение в таблицу
-        my_frame.insert(parent='', index='end', values=calculation(selected_products))
-        my_frame.pack()
-
-        new_product_entry.delete(0, END)  ##очищает окно ввода
-        new_mass_entry.delete(0, END)
-
-        # добавить запись в базу данных
-        add_product_in_archive(selected_products)
 
     # функция при нажатии на кнопку удаления продукта
     def delete_product():
@@ -269,8 +267,16 @@ def windows(meal, bg_color, fg_color):
         selected_item = my_frame.selection()[0]
         my_frame.delete(selected_item)
 
+        delete_product_from_base(deleted_selected_product)
+
+    def delete_product_from_base(deleted_selected_product):
         ## удалить запись из базы данных
-        delete_product_in_archive(deleted_selected_product)
+        connect = sqlite3.connect('archive.db')
+        cursor = connect.cursor()
+        cursor.execute("DELETE FROM archive WHERE name = ? AND g = ?",
+                       [deleted_selected_product[0], deleted_selected_product[1]])
+        connect.commit()
+        connect.close()
 
     # Таблица при нажатии на кнопку завтрак
     window = Tk()
