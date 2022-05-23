@@ -30,25 +30,25 @@ def ckal_calculator():
     global ckal
     # функция для подсчета нормы ккал, исходя из физических нагрузок
     def calculeter():
-        if my_activiti.get() == "Физическая нагрузка отсутствует или минимальная":
+        if my_activiti.get() == "Physical activity is absent or minimal":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.2))
-        elif my_activiti.get() == "Тренировки средней тяжести 2-3 раза в неделю":
+        elif my_activiti.get() == "Midle workouts 2-3 times a week":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.38))
-        elif my_activiti.get() == "Тренировки средней тяжести 4-5 раз в неделю":
+        elif my_activiti.get() == "Midle workouts 4-5 times a week":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.46))
-        elif my_activiti.get() == "Тренировки каждый день":
+        elif my_activiti.get() == "Workout every day":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.64))
-        elif my_activiti.get() == "Ежедневная физическая нагрузка + физическая работа":
+        elif my_activiti.get() == "Workout every day + physical work":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
 
             # окошко расчёта калорий
 
     window = Tk()
-    window.title('Расчет нормы калорий')
+    window.title('Calorie Calculation')
     window.geometry("300x350")
     window['bg'] = 'lavender'
 
-    label = Label(text="Введите свои личные данные", bg="lavender")
+    label = Label(text="Enter your personal data", bg="lavender")
     label.pack(pady=5)
 
     # создаем переменные
@@ -68,35 +68,35 @@ def ckal_calculator():
     f_6 = Frame(window)
 
     # ввод данных
-    height_label = Label(f_1, text="Рост ", bg="lavender")
+    height_label = Label(f_1, text="Height ", bg="lavender")
     height_entry = Entry(f_1, width=8, textvariable=my_height)
-    height2_label = Label(f_1, text="см ", bg="lavender")
+    height2_label = Label(f_1, text="cm ", bg="lavender")
 
-    weight_label = Label(f_2, text="Вес ", bg="lavender")
+    weight_label = Label(f_2, text="Weight ", bg="lavender")
     weight_entry = Entry(f_2, width=8, textvariable=my_weight)
-    weight2_label = Label(f_2, text="кг ", bg="lavender")
+    weight2_label = Label(f_2, text="kg ", bg="lavender")
 
-    age_label = Label(f_3, text="Возраст ", bg="lavender")
+    age_label = Label(f_3, text="Age ", bg="lavender")
     age_entry = Entry(f_3, width=8, textvariable=my_age)
 
-    gender_label = Label(f_4, text="Пол ", bg="lavender")
+    gender_label = Label(f_4, text="Gender ", bg="lavender")
     rad1 = Radiobutton(f_4, text='М', value=4, variable=my_gender)
-    rad2 = Radiobutton(f_4, text='Ж', value=-161, variable=my_gender)
+    rad2 = Radiobutton(f_4, text='W', value=-161, variable=my_gender)
 
-    activiti_label = Label(f_5, text="Активность ", bg="lavender")
+    activiti_label = Label(f_5, text="Activity ", bg="lavender")
     activiti = Combobox(f_5, textvariable=my_activiti, width=48,
-                        values=["Физическая нагрузка отсутствует или минимальная",
-                                "Тренировки средней тяжести 2-3 раза в неделю",
-                                "Тренировки средней тяжести 4-5 раз в неделю",
-                                "Тренировки каждый день",
-                                "Ежедневная физическая нагрузка + физическая работа"])
+                        values=["Physical activity is absent or minimal",
+                                "Midle workouts 2-3 times a week",
+                                "Midle workouts 4-5 times a week",
+                                "Workout every day",
+                                "Workout every day + physical work"])
 
     # вывод данных
-    ckal_label1 = Label(f_6, text="Ваша норма: ", bg="lavender")
+    ckal_label1 = Label(f_6, text="Your calories norm: ", bg="lavender")
     ckal_label2 = Label(f_6, textvariable=ckal, bg="lavender")
-    ckal_label3 = Label(f_6, text="ккал ", bg="lavender")
+    ckal_label3 = Label(f_6, text="kcal ", bg="lavender")
 
-    message_button = Button(text="Узнать", bg="pink", command=calculeter)
+    message_button = Button(text="Get to know", bg="pink", command=calculeter)
 
     # упорядочивание элементов окна
     f_1.pack(pady=5)
@@ -125,7 +125,7 @@ def ckal_calculator():
     ckal_label2.pack(side=LEFT)
     ckal_label3.pack(side=LEFT)
 
-    btn = Button(window, text="Сохранить", bg="pink", command=window.destroy)
+    btn = Button(window, text="Save", bg="pink", command=window.destroy)
     btn.pack(pady=30, side=TOP)
 
     window.mainloop()
@@ -158,13 +158,13 @@ def archive():
     my_date = StringVar()
 
     frame = Frame(window)
-    date_label = Label(frame, text="Дата ", bg="lavender")
+    date_label = Label(frame, text="Date ", bg="lavender")
     date_entry = Entry(frame, width=10, textvariable=my_date)
     date_label.pack(side=LEFT)
     date_entry.pack(side=RIGHT)
     frame.pack(pady=5)
 
-    message_button = Button(window, text="Узнать", bg="pink", command=find_product_from_day)
+    message_button = Button(window, text="Find", bg="pink", command=find_product_from_day)
     message_button.pack(pady=15)
 
     # Таьлица
@@ -200,16 +200,16 @@ def archive():
 
     # заголовки колонок
     my_frame.heading("#0", text="", anchor=CENTER)
-    my_frame.heading("player_eating", text="Прием пищи", anchor=CENTER)
-    my_frame.heading("player_product", text="Продукт", anchor=CENTER)
-    my_frame.heading("player_mass", text="Масса", anchor=CENTER)
-    my_frame.heading("player_kkal", text="Ккал", anchor=CENTER)
-    my_frame.heading("player_p", text="Белки", anchor=CENTER)
-    my_frame.heading("player_f", text="Жиры", anchor=CENTER)
-    my_frame.heading("player_c", text="Углеводы", anchor=CENTER)
+    my_frame.heading("player_eating", text="Meal", anchor=CENTER)
+    my_frame.heading("player_product", text="Product name", anchor=CENTER)
+    my_frame.heading("player_mass", text="Mass", anchor=CENTER)
+    my_frame.heading("player_kkal", text="Kcal", anchor=CENTER)
+    my_frame.heading("player_p", text="Proteins", anchor=CENTER)
+    my_frame.heading("player_f", text="Fats", anchor=CENTER)
+    my_frame.heading("player_c", text="Carbohydrates", anchor=CENTER)
 
     # кнопка СОХРАНЕНИЯ и выхода
-    btn = Button(window, text="Закрыть", bg="pink", relief=RAISED, bd=1, command=window.destroy)
+    btn = Button(window, text="Close", bg="pink", relief=RAISED, bd=1, command=window.destroy)
     btn.pack(side=TOP, pady=60)
 
     window.mainloop()
@@ -317,22 +317,22 @@ def windows(meal, bg_color, fg_color):
 
     # заголовки колонок
     my_frame.heading("#0", text="", anchor=CENTER)
-    my_frame.heading("player_product", text="Продукт", anchor=CENTER)
-    my_frame.heading("player_mass", text="Масса", anchor=CENTER)
-    my_frame.heading("player_kkal", text="Ккал", anchor=CENTER)
-    my_frame.heading("player_p", text="Белки", anchor=CENTER)
-    my_frame.heading("player_f", text="Жиры", anchor=CENTER)
-    my_frame.heading("player_c", text="Углеводы", anchor=CENTER)
+    my_frame.heading("player_product", text="Product name", anchor=CENTER)
+    my_frame.heading("player_mass", text="Mass", anchor=CENTER)
+    my_frame.heading("player_kkal", text="Kcal", anchor=CENTER)
+    my_frame.heading("player_p", text="Proteins", anchor=CENTER)
+    my_frame.heading("player_f", text="Fats", anchor=CENTER)
+    my_frame.heading("player_c", text="Carbohydrates", anchor=CENTER)
 
     # таблица для добавления данных
     low_frame = Frame(window)
     low_frame.pack(pady=50)
 
     # заголовки
-    new_product = Label(low_frame, text="Продукт")
+    new_product = Label(low_frame, text="Product")
     new_product.grid(row=0, column=0)
 
-    new_mass = Label(low_frame, text="Масса")
+    new_mass = Label(low_frame, text="Mass")
     new_mass.grid(row=0, column=1)
 
     # окна для ввода данных
@@ -346,13 +346,13 @@ def windows(meal, bg_color, fg_color):
     new_mass_entry.grid(row=1, column=1)
 
     # Кнопки
-    select_button = Button(window, text="Добавить", command=add_product)
+    select_button = Button(window, text="Add", command=add_product)
     select_button.pack(pady=5)
 
-    delete_button = Button(window, text="Удалить", command=delete_product)
+    delete_button = Button(window, text="Delete", command=delete_product)
     delete_button.pack(pady=5)
 
-    btn = Button(window, text="Закрыть", bg="pink", fg="HotPink4", relief=RAISED, bd=1, command=window.destroy)
+    btn = Button(window, text="Close", bg="pink", fg="HotPink4", relief=RAISED, bd=1, command=window.destroy)
     btn.pack(side=TOP, pady=40)
 
     window.mainloop()
@@ -366,7 +366,7 @@ window = Tk()
 # photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
 # window.iconphoto(False, photo)
 
-window.title("Приложение :'Подсчёт калорий'")
+window.title("App:'Calories Calculator'")
 window.geometry('350x620')
 window['bg'] = 'Lavender'
 
@@ -404,8 +404,8 @@ ax = fig.add_subplot(111)
 ax.pie([summ(),ckal.get()-summ()], colors = ("lightcoral", "yellowgreen"),
        wedgeprops=dict(width=0.5),
        autopct='%1.1f%%')
-ax.legend([f"Съедено:{summ()} kcal",
-          f"Осталось: {ckal.get()-summ()} kcal"])
+ax.legend([f"Eaten:{summ()} kcal",
+          f"Left: {ckal.get()-summ()} kcal"])
 circle=matplotlib.patches.Circle((0,0), 0.3, color='lavender')
 ax.add_artist(circle)
 ax.axis('equal')
@@ -414,7 +414,7 @@ canvas.get_tk_widget().pack()
 canvas.draw()
 
 # кнопка СОХРАНЕНИЯ и выхода
-btn = Button(window, text="Закрыть", bg="Pink", fg="HotPink4", relief=RAISED, bd = 1, command=window.destroy)
+btn = Button(window, text="Close", bg="Pink", fg="HotPink4", relief=RAISED, bd = 1, command=window.destroy)
 btn.pack(side=TOP)
 
 window.mainloop()
