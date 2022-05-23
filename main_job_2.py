@@ -13,7 +13,7 @@ from functools import partial
 def find_today():
     return date.today().strftime("%d.%m.%Y")
 
-#функция для подсчета общего числа калорий     
+#функция для подсчета общего числа калорий
 def summ():
     connect = sqlite3.connect('archive.db')
     cursor = connect.cursor()
@@ -23,7 +23,7 @@ def summ():
     for item in items:
         summa += item[0]
     connect.close()
-    return summa   
+    return summa
 
 # Окно при запуске приложения и вычислении его нормы ккал
 def ckal_calculator():
@@ -41,8 +41,7 @@ def ckal_calculator():
         elif my_activiti.get() == "Workout every day + physical work":
             ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
 
-            # окошко расчёта калорий
-
+    # окошко расчёта калорий
     window = Tk()
     window.title('Calorie Calculation')
     window.geometry("300x350")
@@ -139,10 +138,9 @@ def archive():
 
         connect = sqlite3.connect('archive.db')  ##делаем запрос к базе данных
         cursor = connect.cursor()
-        cursor.execute('''SELECT meal,name,g,kkal,p,f,c  FROM archive WHERE date = ?''', [my_date.get()])
+        cursor.execute('''SELECT meal,name,g,kkal,p,f,c  FROM archive WHERE date = ?''', [date_entry.get()])
         all_products = cursor.fetchall()
         connect.close()
-        print(all_products)
         for item in all_products:
             my_frame.insert(parent='', index='end', values=item)
             my_frame.pack()
@@ -223,13 +221,14 @@ def windows(meal, bg_color, fg_color):
             if type(item) == str:
                 calculated_selected_product.append(item)
             else:
-                calculated_selected_product.append(item * my_mass.get() / 100)
+                calculated_selected_product.append(item * int(new_mass_entry.get()) / 100)
         return tuple(calculated_selected_product)
 
+    # функция добавляет продукт в таблицу
     def add_product():
         connect = sqlite3.connect('n_base.db')  ##делаем запрос к базе данных
         cursor = connect.cursor()
-        cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [my_product.get().title()])
+        cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [new_product_entry.get().title()])
         calculated_selected_product = calculation(cursor.fetchone())
         connect.close()
 
@@ -242,11 +241,12 @@ def windows(meal, bg_color, fg_color):
 
         add_product_to_base(calculated_selected_product)
 
+    # функция добавляет продукт в БД
     def add_product_to_base(calculated_selected_product):
         # добавить запись в базу данных
         added_calculated_selected_product = []
         added_calculated_selected_product.append(find_today())
-        added_calculated_selected_product.append('breakfast')
+        added_calculated_selected_product.append(meal.lower())
         for item in calculated_selected_product:
             added_calculated_selected_product.append(item)
 
@@ -257,7 +257,7 @@ def windows(meal, bg_color, fg_color):
         connect.commit()
         connect.close()
 
-    # функция при нажатии на кнопку удаления продукта
+    # функция удаляет продукт из таблицы
     def delete_product():
         # захватить запись в переменную
         selected = my_frame.focus()
@@ -269,6 +269,7 @@ def windows(meal, bg_color, fg_color):
 
         delete_product_from_base(deleted_selected_product)
 
+    # функция удаляет продукт из БД
     def delete_product_from_base(deleted_selected_product):
         ## удалить запись из базы данных
         connect = sqlite3.connect('archive.db')
@@ -323,6 +324,16 @@ def windows(meal, bg_color, fg_color):
     my_frame.heading("player_p", text="Proteins", anchor=CENTER)
     my_frame.heading("player_f", text="Fats", anchor=CENTER)
     my_frame.heading("player_c", text="Carbohydrates", anchor=CENTER)
+
+    # добавляем продукты в таблицу, добавленные ранее
+    connect = sqlite3.connect('archive.db')  ##делаем запрос к базе данных
+    cursor = connect.cursor()
+    cursor.execute('''SELECT name,g,kkal,p,f,c  FROM archive WHERE date = ? AND meal = ?''', [find_today(), meal.lower()])
+    all_products = cursor.fetchall()
+    connect.close()
+    for item in all_products:
+        my_frame.insert(parent='', index='end', values=item)
+        my_frame.pack()
 
     # таблица для добавления данных
     low_frame = Frame(window)
