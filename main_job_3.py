@@ -409,7 +409,7 @@ def main():
             canvas.get_tk_widget().pack()
             canvas.draw()
 
-            messagebox.showwarning('warning', 'хватит кушать!!') #предупреждение
+            messagebox.showwarning('warning', f'You overate {summ()-ckal.get()} calories!!!') #предупреждение
 
     window_main = Tk()
 
