@@ -9,11 +9,11 @@ def insert_new_product():
         connect.close()
 
     window_insert = Tk()
-    window_insert.title('INSERT')  # НАТАША ПРИДУМАЙ НАЗВАНИЕ
+    window_insert.title('New product') 
     window_insert.geometry('750x280')
     window_insert['bg'] = 'lavender'
 
-    title = Label(window_insert, text="Ведите свой прдукт и его кбжу. /n Рекомендуется вводить данные на 100 г продукта.", bg="lavender", fg="purple4")
+    title = Label(window_insert, text="Enter your product and its kpfc (for 100 g of product.)", bg="lavender", fg="purple4")
     title.pack(pady=20)
 
     # переменные для ввода данных
