@@ -10,15 +10,96 @@ from datetime import date
 from functools import partial
 from tkinter import messagebox
 
-# закрывает окно с приемом пищи, открывает главное
-def open_main(window_meal):
-    window_meal.destroy()
+# закрывает текущее окно, открывает главное окно
+def open_main(window_now):
+    window_now.destroy()
     main()
 
-# закрывает главное открывает окно с приемом пищи
-def close_main(window_main, meal, bg_color, fg_color):
+# закрывает главное окно, открывает окно с приемом пищи
+def open_meal(window_main, meal, bg_color, fg_color):
     window_main.destroy()
     windows(meal, bg_color, fg_color)
+
+# закрывает главное окно, открывает окно архива
+def open_archive(window_main):
+    window_main.destroy()
+    archive()
+
+# закрывает главное окно, открывает окно калькулятора
+def open_cakculator(window_main):
+    window_main.destroy()
+    ckal_calculator()
+
+# закрывает главное окно, открывает окно для добавления в БД
+def open_insert_new_product(window_meal, meal, bg_color, fg_color):
+    window_meal.destroy()
+    insert_new_product(meal, bg_color, fg_color)
+
+# окно для добавления нового продукта в бд
+def insert_new_product(meal, bg_color, fg_color):
+    # добавляет прокудк в бд
+    def insert_product_in_db():
+        connect = sqlite3.connect('n_base.db')
+        cursor = connect.cursor()
+        try:
+            cursor.execute('''INSERT INTO n_base VALUES (?,?,?,?,?,?)''',
+                           (str(Entry1.get()).title(), int(Entry2.get()), int(Entry3.get()), int(Entry4.get()), int(Entry5.get()), int(Entry6.get())))
+            connect.commit()
+            connect.close()
+        except:
+            messagebox.showerror('ERROR', 'Данные введены неверно!')
+
+    window_insert = Tk()
+    window_insert.title('INSERT')  # НАТАША ПРИДУМАЙ НАЗВАНИЕ
+    window_insert.geometry('750x280')
+    window_insert['bg'] = 'lavender'
+
+    title = Label(window_insert,
+                  text="Ведите свой прдукт и его кбжу. /n Рекомендуется вводить данные на 100 г продукта.",
+                  bg="lavender", fg="purple4")
+    title.pack(pady=20)
+
+    # переменные для ввода данных
+    insert_product = StringVar()
+    insert_mass = IntVar()
+    insert_kkal = IntVar()
+    insert_p = IntVar()
+    insert_f = IntVar()
+    insert_c = IntVar()
+
+    # таблица для добавления данных
+    low_frame = Frame(window_insert)
+    low_frame.pack(pady=20)
+
+    # заголовки
+    Label1 = Label(low_frame, text="Product name").grid(row=0, column=0)
+    Label2 = Label(low_frame, text="Mass").grid(row=0, column=1)  ## рекоммендуется вводить 100 грамм
+    Label3 = Label(low_frame, text="Kcal").grid(row=0, column=2)
+    Label4 = Label(low_frame, text="Proteins").grid(row=0, column=3)
+    Label5 = Label(low_frame, text="Fats").grid(row=0, column=4)
+    Label6 = Label(low_frame, text="Carbohydrates").grid(row=0, column=5)
+
+    Entry1 = Entry(low_frame, textvariable=insert_product)
+    Entry1.grid(row=1, column=0)
+    Entry2 = Entry(low_frame, textvariable=insert_mass)
+    Entry2.grid(row=1, column=1)
+    Entry3 = Entry(low_frame, textvariable=insert_kkal)
+    Entry3.grid(row=1, column=2)
+    Entry4 = Entry(low_frame, textvariable=insert_p)
+    Entry4.grid(row=1, column=3)
+    Entry5 = Entry(low_frame, textvariable=insert_f)
+    Entry5.grid(row=1, column=4)
+    Entry6 = Entry(low_frame, textvariable=insert_c)
+    Entry6.grid(row=1, column=5)
+
+    # Кнопки
+    select_button = Button(window_insert, text="Add", command=insert_product_in_db)
+    select_button.pack(pady=5)
+
+    btn = Button(window_insert, text="Close", bg="pink", fg="HotPink4", relief=RAISED, bd=1, command=partial(open_meal, window_insert, meal, bg_color, fg_color))
+    btn.pack(side=TOP, pady=40)
+
+    window_insert.mainloop()
 
 # Функция для поиска нынешней даты
 def find_today():
@@ -41,16 +122,22 @@ def ckal_calculator():
     global ckal
     # функция для подсчета нормы ккал, исходя из физических нагрузок
     def calculeter():
-        if my_activiti.get() == "Physical activity is absent or minimal":
-            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.2))
-        elif my_activiti.get() == "Midle workouts 2-3 times a week":
-            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.38))
-        elif my_activiti.get() == "Midle workouts 4-5 times a week":
-            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.46))
-        elif my_activiti.get() == "Workout every day":
-            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.64))
-        elif my_activiti.get() == "Workout every day + physical work":
-            ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
+        try:
+            if my_activiti.get() == "Physical activity is absent or minimal":
+                ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.2))
+            elif my_activiti.get() == "Midle workouts 2-3 times a week":
+                ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.38))
+            elif my_activiti.get() == "Midle workouts 4-5 times a week":
+                ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.46))
+            elif my_activiti.get() == "Workout every day":
+                ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.64))
+            elif my_activiti.get() == "Workout every day + physical work":
+                ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
+
+            if ckal.get() <= 0:
+                messagebox.showerror('ERROR', 'Данные введены неверно!')
+        except:
+            messagebox.showerror('ERROR', 'Данные введены неверно!')
 
     # окошко расчёта калорий
     window_calculetor = Tk()
@@ -135,7 +222,7 @@ def ckal_calculator():
     ckal_label2.pack(side=LEFT)
     ckal_label3.pack(side=LEFT)
 
-    btn = Button(window_calculetor, text="Save", bg="pink", command=window_calculetor.destroy)
+    btn = Button(window_calculetor, text="Save", bg="pink", command=partial(open_main, window_calculetor))
     btn.pack(pady=30, side=TOP)
 
     window_calculetor.mainloop()
@@ -218,12 +305,12 @@ def archive():
     my_frame.heading("player_c", text="Carbohydrates", anchor=CENTER)
 
     # кнопка СОХРАНЕНИЯ и выхода
-    btn = Button(window_archive, text="Close", bg="pink", relief=RAISED, bd=1, command=window_archive.destroy)
+    btn = Button(window_archive, text="Close", bg="pink", relief=RAISED, bd=1, command=partial(open_main, window_archive))
     btn.pack(side=TOP, pady=60)
 
     window_archive.mainloop()
 
-# Окна
+# Окна c приемами пищи
 def windows(meal, bg_color, fg_color):
     # калькулятор расчета кбжу по массе
     def calculation(selected_products):
@@ -240,17 +327,24 @@ def windows(meal, bg_color, fg_color):
         connect = sqlite3.connect('n_base.db')  ##делаем запрос к базе данных
         cursor = connect.cursor()
         cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [new_product_entry.get().title()])
-        calculated_selected_product = calculation(cursor.fetchone())
-        connect.close()
+        try:
+            calculated_selected_product = calculation(cursor.fetchone())
+            connect.close()
 
-        # записываем значение в таблицу
-        my_frame.insert(parent='', index='end', values=calculated_selected_product)
-        my_frame.pack()
+            # записываем значение в таблицу
+            my_frame.insert(parent='', index='end', values=calculated_selected_product)
+            my_frame.pack()
 
-        new_product_entry.delete(0, END)  ##очищает окно ввода
-        new_mass_entry.delete(0, END)
+            new_product_entry.delete(0, END)  ##очищает окно ввода
+            new_mass_entry.delete(0, END)
 
-        add_product_to_base(calculated_selected_product)
+            add_product_to_base(calculated_selected_product)
+
+        except:
+            res = messagebox.askquestion('Наташа и Настя самые лучшие!', 'Такого значения нет в базе данных. Вы хотите добавит в базу данных свой продукт?')
+            ##тут ещё ошибка если массу цифрами ввести, но я не знаю как ее решить
+            if res == 'yes':
+                open_insert_new_product(window_meal,meal,bg_color,fg_color)
 
     # функция добавляет продукт в БД
     def add_product_to_base(calculated_selected_product):
@@ -379,6 +473,7 @@ def windows(meal, bg_color, fg_color):
 
     window_meal.mainloop()
 
+# главное окно с кнопками
 def main():
     def diagram():
         # диаграмма для сводки
@@ -409,7 +504,7 @@ def main():
             canvas.get_tk_widget().pack()
             canvas.draw()
 
-            messagebox.showwarning('warning', f'You overate {summ()-ckal.get()} calories!!!') #предупреждение
+            messagebox.showwarning('warning', f'You overate {summ() - ckal.get()} calories!!!')  # предупреждение
 
     window_main = Tk()
 
@@ -424,28 +519,31 @@ def main():
     hat = Frame(window_main)
     hat['bg'] = 'lavender'
 
-    title = Label(hat, text=find_today(), bg = 'lavender', fg="purple4", font=70, width=20)
+    title = Label(hat, text=find_today(), bg = 'lavender', fg="purple4", font=20, width=12)
     title.pack(pady=3, side=LEFT)
 
-    btn = Button(hat, text ='Archive', bg="pink", fg ="HotPink4", relief=RAISED, bd = 6, width=12, command=archive)
+    btn = Button(hat, text='Сalculator', bg="pink", fg="HotPink4", relief=RAISED, bd=6, width=12, command=partial(open_cakculator, window_main))
+    btn.pack(pady=3, side=RIGHT)
+
+    btn = Button(hat, text ='Archive', bg="pink", fg ="HotPink4", relief=RAISED, bd = 6, width=12, command=partial(open_archive, window_main))
     btn.pack(pady=3, side=RIGHT)
 
     hat.pack()
 
     # кнопка выбора завтрака
-    btn = Button(window_main, text ='Breakfast', bg="Linen", fg ='SandyBrown', font=90, width=30, height=1, relief=RAISED, bd=6, command=partial(close_main, window_main, "Breakfast", "Linen", "SandyBrown"))
+    btn = Button(window_main, text ='Breakfast', bg="Linen", fg ='SandyBrown', font=90, width=30, height=1, relief=RAISED, bd=6, command=partial(open_meal, window_main, "Breakfast", "Linen", "SandyBrown"))
     btn.pack(pady=3, side=TOP)
 
     # кнопка выбора обеда
-    btn = Button(window_main, text="Lunch", bg="Honeydew", fg ="DarkSeaGreen", font=70, width=30, height=1, relief=RAISED, bd=6, command=partial(close_main, window_main, "Lunch", "Honeydew", "DarkSeaGreen"))
+    btn = Button(window_main, text="Lunch", bg="Honeydew", fg ="DarkSeaGreen", font=70, width=30, height=1, relief=RAISED, bd=6, command=partial(open_meal, window_main, "Lunch", "Honeydew", "DarkSeaGreen"))
     btn.pack(pady=2, side=TOP)
 
     # кнопка выбора ужина
-    btn = Button(window_main, text="Dinner", bg="AliceBlue", fg ="CornflowerBlue", font=70, width=30, height=1, relief=RAISED, bd=6, command=partial(close_main, window_main, "Dinner", "AliceBlue", "CornflowerBlue"))
+    btn = Button(window_main, text="Dinner", bg="AliceBlue", fg ="CornflowerBlue", font=70, width=30, height=1, relief=RAISED, bd=6, command=partial(open_meal, window_main, "Dinner", "AliceBlue", "CornflowerBlue"))
     btn.pack(pady=2, side=TOP)
 
     # кнопка выбора перекуса
-    btn = Button(window_main, text="Snack", bg="MistyRose", fg ="PaleVioletRed", font=70, width=30, height=1, relief=RAISED, bd=6, command=partial(close_main, window_main, "Snack", "MistyRose", "PaleVioletRed"))
+    btn = Button(window_main, text="Snack", bg="MistyRose", fg ="PaleVioletRed", font=70, width=30, height=1, relief=RAISED, bd=6, command=partial(open_meal, window_main, "Snack", "MistyRose", "PaleVioletRed"))
     btn.pack(pady=2, side=TOP)
 
     diagram() ##вызов диаграммы
@@ -458,6 +556,3 @@ def main():
 
 # вызов окна с рачсетом нормы ккал и сохранение нормы
 ckal_calculator()
-
-# вызов главного окна
-main()
