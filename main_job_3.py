@@ -37,25 +37,33 @@ def open_insert_new_product(window_meal, meal, bg_color, fg_color):
 
 # окно для добавления нового продукта в бд
 def insert_new_product(meal, bg_color, fg_color):
-    # добавляет прокудк в бд
+    # добавляет продукт в бд
     def insert_product_in_db():
         connect = sqlite3.connect('n_base.db')
         cursor = connect.cursor()
         try:
             cursor.execute('''INSERT INTO n_base VALUES (?,?,?,?,?,?)''',
                            (str(Entry1.get()).title(), int(Entry2.get()), int(Entry3.get()), int(Entry4.get()), int(Entry5.get()), int(Entry6.get())))
+            Entry1.delete(0, END)  ##очищает окно ввода
+            Entry2.delete(0, END)
+            Entry3.delete(0, END)  
+            Entry4.delete(0, END)
+            Entry5.delete(0, END) 
+            Entry6.delete(0, END)
             connect.commit()
             connect.close()
         except:
-            messagebox.showerror('ERROR', 'Данные введены неверно!')
+            messagebox.showerror('ERROR', 'Data entered incorrectly!')
 
     window_insert = Tk()
-    window_insert.title('INSERT')  # НАТАША ПРИДУМАЙ НАЗВАНИЕ
+    window_insert.title('Entering a new product to the database.') 
     window_insert.geometry('750x280')
     window_insert['bg'] = 'lavender'
+    photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
+    window_insert.iconphoto(False, photo)
 
     title = Label(window_insert,
-                  text="Ведите свой прдукт и его кбжу. /n Рекомендуется вводить данные на 100 г продукта.",
+                  text="Enter your product and its kpfc(for 100 g of product).",
                   bg="lavender", fg="purple4")
     title.pack(pady=20)
 
@@ -135,15 +143,17 @@ def ckal_calculator():
                 ckal.set(int((my_height.get() * 6.25 + my_weight.get() * 10 - my_age.get() * 5 + my_gender.get()) * 1.9))
 
             if ckal.get() <= 0:
-                messagebox.showerror('ERROR', 'Данные введены неверно!')
+                messagebox.showerror('ERROR', 'Data entered incorrectly!')
         except:
-            messagebox.showerror('ERROR', 'Данные введены неверно!')
+            messagebox.showerror('ERROR', 'Data entered incorrectly.!')
 
     # окошко расчёта калорий
     window_calculetor = Tk()
     window_calculetor.title('Calorie Calculation')
     window_calculetor.geometry("300x350")
     window_calculetor['bg'] = 'lavender'
+    photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
+    window_calculetor.iconphoto(False, photo)
 
     label = Label(text="Enter your personal data", bg="lavender")
     label.pack(pady=5)
@@ -239,14 +249,20 @@ def archive():
         cursor.execute('''SELECT meal,name,g,kkal,p,f,c  FROM archive WHERE date = ?''', [date_entry.get()])
         all_products = cursor.fetchall()
         connect.close()
-        for item in all_products:
-            my_frame.insert(parent='', index='end', values=item)
-            my_frame.pack()
+        if all_products!=[]:
+            for item in all_products:
+                my_frame.insert(parent='', index='end', values=item)
+                my_frame.pack()
+        else:
+            messagebox.showerror('ERROR','''The value is not in the archive.
+(Check if the date is entered correctly:__.__.____ )''')
 
     window_archive = Tk()
     window_archive.title("Archive")
     window_archive.geometry('350x620')
     window_archive['bg'] = 'Lavender'
+    photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
+    window_archive.iconphoto(False, photo)
 
     title = Label(window_archive, text="Archive", bg="Lavender", fg="purple4", font=70, width=30)
     title.pack(pady=5)
@@ -341,7 +357,7 @@ def windows(meal, bg_color, fg_color):
             add_product_to_base(calculated_selected_product)
 
         except:
-            res = messagebox.askquestion('Наташа и Настя самые лучшие!', 'Такого значения нет в базе данных. Вы хотите добавит в базу данных свой продукт?')
+            res = messagebox.askquestion('ERROR!', 'Data entered incorrectly. Do you want to add your product to the database?')
             ##тут ещё ошибка если массу цифрами ввести, но я не знаю как ее решить
             if res == 'yes':
                 open_insert_new_product(window_meal,meal,bg_color,fg_color)
@@ -389,6 +405,8 @@ def windows(meal, bg_color, fg_color):
     window_meal.title(meal)
     window_meal.geometry('350x620')
     window_meal['bg'] = bg_color
+    photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
+    window_meal.iconphoto(False, photo)
 
     title = Label(window_meal, text=meal, bg=bg_color, fg=fg_color, font=70, width=30)
     title.pack()
@@ -504,7 +522,7 @@ def main():
             canvas.get_tk_widget().pack()
             canvas.draw()
 
-            messagebox.showwarning('warning', f'You overate {summ() - ckal.get()} calories!!!')  # предупреждение
+            messagebox.showwarning('WARNING', f'You overate {summ() - ckal.get()} calories!!!')  # предупреждение
 
     window_main = Tk()
 
