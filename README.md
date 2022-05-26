@@ -56,5 +56,13 @@
 >[диаграмма](https://github.com/vvoroby/project-2-semester/blob/main/functions/diagram.py)
 
 ***
+## Ошибки ##
+При неправильном вводе пользователь будет получать предупреждение об ошибке.
+
+![image](https://user-images.githubusercontent.com/99788525/170520596-e2f197b9-00ff-49c0-844a-03a955bbb0ff.png) ![image](https://user-images.githubusercontent.com/99788525/170520674-9cc1475f-d53f-4f02-92db-dc805fe2e0fd.png)
+
+
+
+***
 ## Завершение ##
 >Мы будем рады вашим предложениям и пожеланиям!
