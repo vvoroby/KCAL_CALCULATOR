@@ -53,6 +53,8 @@
 ## Окна приёмов пищи ##
 В каждом окне находится таблица, в которую пользователь может ввести название продукта и его массу. Если такой продукт имеется в базе данных, то для его массы подсчитывается КБЖУ (количество Ккал, белков, жиров, углеводов) и заносится в таблицу, а также в архив(при занесении в архив фиксируется название приема пищи и дата). 
 
+![image](https://sun9-west.userapi.com/sun9-6/s/v1/ig2/xCXPneCDR0rm-KSOKElok1MoQsfXYB7qqiaNsyaEHvdDKFgP6PAZFPK_tmQGd88yqiRIwo5zmx5u8PpkYA6fj6XQ.jpg?size=1600x679&quality=95&type=album)
+
 Функция для окошек приёмов пищи:
 >[окна](https://github.com/vvoroby/project-2-semester/blob/main/functions/windows.py)
 
