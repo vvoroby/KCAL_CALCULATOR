@@ -4,11 +4,11 @@
 Мы создали программу и интерфейс для нее, которая поможет вам узнать вашу дневную норму Ккал, вы сможете узнавать сколько Ккал, б, ж, у находится в продуктах (наша база данных пока маленькая, но у вас есть возможность заносить свои продукты в нее), вы сможете отслеживать свое питание в течение дня, занося съеденные продукты в ваш персональный пищевой дневник, а также просматривать записи в нем за предыдущие дни.
 ***
 ## Использованные модули ##
-*matplotlib
-*sqlite3
-*tkinter
-*datetime
-*functools
+* matplotlib
+* sqlite3
+* tkinter
+* datetime
+* functools
 
 ***
 ## База данных ##
@@ -23,7 +23,8 @@
 ## Калькулятор ##
 Функция калькулятор расчивает дневную норму калорий для человека по его росту,весу,возрасту ,полу и уровню физической активности.
 
-![Калькулятор]([/путь/к/изображению.jpg](https://sun9-14.userapi.com/s/v1/if2/AECGq2gQ1NLQgLFs8xyTEZbGt_rmqj24CEvdIODEGTotV4nd8UxL-f2TaLe3PShbLq2xmDZ_Ytj2rVUxP9UUMRUh.jpg?size=446x563&quality=95&type=album))
+![image](https://user-images.githubusercontent.com/99788525/170520179-7ab74055-8bc4-47bc-94da-ced4a266a930.png)
+
 
 >[калькулятор](https://github.com/vvoroby/project-2-semester/blob/main/functions/kcal_calculator.py)
 ***
