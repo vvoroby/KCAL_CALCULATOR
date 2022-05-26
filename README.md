@@ -23,7 +23,9 @@
 ## Калькулятор ##
 Функция калькулятор расчивает дневную норму калорий для человека по его росту,весу,возрасту ,полу и уровню физической активности.
 
-![image](https://user-images.githubusercontent.com/99788525/170520179-7ab74055-8bc4-47bc-94da-ced4a266a930.png)
+![image](https://user-images.githubusercontent.com/99788525/170520179-7ab74055-8bc4-47bc-94da-ced4a266a930.png)![image](https://user-images.githubusercontent.com/99788525/170520805-d49bb12f-8d81-4b5c-93eb-c06d5165f3c4.png)
+
+![image](https://user-images.githubusercontent.com/99788525/170520918-6804f425-9d24-45d7-ae93-8d03a0f1e39d.png)
 
 
 >[калькулятор](https://github.com/vvoroby/project-2-semester/blob/main/functions/kcal_calculator.py)
@@ -31,6 +33,7 @@
 ## Интерфейс ##
 У нас есть главное окошко с кнопками,которые открывают новые окна с таблицами для завтрака, обеда, ужина, перекуса. Кроме того, сверху главного окна отображается актуальная дата и имеются кнопки, открывающие архив и окно "калькулятор".
 В нижней части окна находится диаграмма, которая отображает процент употребленных калорий от общей нормы человека.
+
 ***
 ## Окна приёмов пищи ##
 Функция для окошек приёмов пищи прописана в:
@@ -59,7 +62,8 @@
 ## Ошибки ##
 При неправильном вводе пользователь будет получать предупреждение об ошибке.
 
-![image](https://user-images.githubusercontent.com/99788525/170520596-e2f197b9-00ff-49c0-844a-03a955bbb0ff.png) ![image](https://user-images.githubusercontent.com/99788525/170520674-9cc1475f-d53f-4f02-92db-dc805fe2e0fd.png)
+![image](https://user-images.githubusercontent.com/99788525/170520596-e2f197b9-00ff-49c0-844a-03a955bbb0ff.png) ![image](https://user-images.githubusercontent.com/99788525/170520674-9cc1475f-d53f-4f02-92db-dc805fe2e0fd.png)![image](https://user-images.githubusercontent.com/99788525/170520978-aa4b63df-cfa1-40c5-a17f-7f3e75e5f785.png)
+
 
 
 
