@@ -41,13 +41,13 @@
 
 >[калькулятор](https://github.com/vvoroby/project-2-semester/blob/main/functions/kcal_calculator.py)
 
-![image](https://user-images.githubusercontent.com/99788525/170520179-7ab74055-8bc4-47bc-94da-ced4a266a930.png)![image](https://user-images.githubusercontent.com/99788525/170520805-d49bb12f-8d81-4b5c-93eb-c06d5165f3c4.png)
+![image](https://sun9-west.userapi.com/sun9-38/s/v1/ig2/IYryp5JyjLNfst1fO2oT6Y7J0-vZ0oZ77FWYJllDfo_es7T5zoQQa6cCc9BM3xFjhN6i4Gj4jrGZYZu70Hct7X5y.jpg?size=1600x1005&quality=95&type=album)
 
 ***
 ## Интерфейс ##
 У нас есть главное окошко с кнопками, которые открывают новые окна с таблицами для завтрака, обеда, ужина, перекуса. Кроме того, сверху главного окна отображается актуальная дата и имеются кнопки, открывающие архив и окно "калькулятор". В нижней части окна находится диаграмма, которая отображает процент употребленных калорий от дневной нормы пользователя.
 
-![image](https://user-images.githubusercontent.com/99788525/170520918-6804f425-9d24-45d7-ae93-8d03a0f1e39d.png)
+![image](https://sun9-west.userapi.com/sun9-51/s/v1/ig2/Ewx0W0wvszqy-3CStj8tJuKz_2lxslO3cfNXEcE-t244owI4KEfNp2bJ294Cq3MGnqFntr9O3QG1aWpDU7aGNhmC.jpg?size=1600x899&quality=95&type=album)
 
 ***
 ## Окна приёмов пищи ##
