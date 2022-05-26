@@ -563,7 +563,7 @@ def main():
                    wedgeprops=dict(width=0.5),
                    autopct='%1.1f%%')## данные диаграммы 
             ax.legend([f"Eaten:{summ()} kcal",
-                       f"Left: {ckal.get() - summ()} kcal"]) ## легенда диаграммы
+                       f"Left: {int(ckal.get() - summ())} kcal"]) ## легенда диаграммы
             circle = matplotlib.patches.Circle((0, 0), 0.3, color='lavender')
             ax.add_artist(circle)
             ax.axis('equal')
