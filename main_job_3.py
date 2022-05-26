@@ -133,7 +133,7 @@ def find_today():
     return date.today().strftime("%d.%m.%Y")
 
 """
-Функция для подсчета калорий съеденныхх сегодня
+Функция для подсчета калорий съеденных сегодня
 """
 def summ():
     connect = sqlite3.connect('archive.db') ## делаем запрос к базе данных
