@@ -83,12 +83,8 @@
 ## Ошибки ##
 При неправильном вводе пользователь будет получать предупреждение об ошибке.
 
-![image](https://user-images.githubusercontent.com/99788525/170520596-e2f197b9-00ff-49c0-844a-03a955bbb0ff.png) ![image](https://user-images.githubusercontent.com/99788525/170520674-9cc1475f-d53f-4f02-92db-dc805fe2e0fd.png)![image](https://user-images.githubusercontent.com/99788525/170520978-aa4b63df-cfa1-40c5-a17f-7f3e75e5f785.png)
+![image](https://sun9-east.userapi.com/sun9-35/s/v1/ig2/P_LCQxz-8_on1ILdTplyK3j387HeqIyaSSDWHawn0U6tgZRJ83jViLKuTPdMj-pk6joQA3KO3jdoLI7Bdr1LPShT.jpg?size=1600x899&quality=95&type=album)
 
-
-***
-## Завершение ##
->Мы будем рады вашим замечаниям и пожеланиям!
 
 ***
 Работу выполняли: Воробьева Анастасия, Тюгун Наталья
