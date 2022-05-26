@@ -262,6 +262,7 @@ def ckal_calculator():
     ckal_label2.pack(side=LEFT)
     ckal_label3.pack(side=LEFT)
 
+    #кнопка "сохранить"
     btn = Button(window_calculetor, text="Save", bg="pink", command=partial(open_main, window_calculetor))
     btn.pack(pady=30, side=TOP)
 
@@ -281,7 +282,7 @@ def archive():
 
         connect = sqlite3.connect('archive.db')  ## делаем запрос к архиву
         cursor = connect.cursor()
-        ## выбираем нужные нам продукты по дате и передаём в переменную
+        # выбираем нужные нам продукты по дате и передаём в переменную
         cursor.execute('''SELECT meal,name,g,kkal,p,f,c  FROM archive WHERE date = ?''', [date_entry.get()])
         all_products = cursor.fetchall()
         connect.close()
