@@ -6,5 +6,6 @@
 ## База данных ##
 В нашей базе данных находится 100 различных записей с наименованием продуктов, их калорийностью, содержанием белков, жиров, углеводов на 100 грамм.
 [база данных](https://github.com/vvoroby/project-2-semester/blob/main/database/n_base.db?raw=true)
+
 Вы можете самостоятельно добавить продукт в базу данных с помощью функции : [функция добавления](https://github.com/vvoroby/project-2-semester/blob/main/functions/insert_new_product.py)
 >Мы будем рады вашим и пожеланиям!
