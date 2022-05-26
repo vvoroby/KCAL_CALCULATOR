@@ -13,35 +13,33 @@ from tkinter import messagebox
 """
 Закрывает текущее окно, открывает главное окно
 """
-
 def open_main(window_now):
     window_now.destroy()
     main()
 
 """
-Закрывает главное окно, открывает окно с приемом пищи
+Закрывает текущее окно, открывает окно с приемом пищи
 """
-
 def open_meal(window_main, meal, bg_color, fg_color):
     window_main.destroy()
     windows(meal, bg_color, fg_color)
 
 """
-Закрывает главное окно, открывает окно архива
+Закрывает текущее окно, открывает окно архива
 """
 def open_archive(window_main):
     window_main.destroy()
     archive()
 
 """
-Закрывает главное окно, открывает окно калькулятора
+Закрывает текущее окно, открывает окно калькулятора
 """
 def open_cakculator(window_main):
     window_main.destroy()
     ckal_calculator()
 
 """
-Закрывает главное окно, открывает окно для добавления в БД
+Закрывает текущее окно, открывает окно для добавления в БД
 """
 def open_insert_new_product(window_meal, meal, bg_color, fg_color):
     window_meal.destroy()
@@ -52,10 +50,10 @@ def open_insert_new_product(window_meal, meal, bg_color, fg_color):
 """
 def insert_new_product(meal, bg_color, fg_color):
     """ 
-    Добавляет продукт в БД
+    Добавляет продукт пользователя в БД
     """
     def insert_product_in_db():
-        connect = sqlite3.connect('n_base.db') ## создаём соединение с БД
+        connect = sqlite3.connect('n_base.db') ## создаём соединение с БД, где хранися список всех продуктов
         cursor = connect.cursor()
         try:
             # добавляем в базу
@@ -73,7 +71,7 @@ def insert_new_product(meal, bg_color, fg_color):
         # вывод ошибки    
         except:
             messagebox.showerror('ERROR', 'Data entered incorrectly!')
-    # окно для добавления продукта
+    # интерфейс окна для добавления продукта
     window_insert = Tk()
     window_insert.title('Entering a new product to the database.') 
     window_insert.geometry('750x280')
@@ -129,13 +127,13 @@ def insert_new_product(meal, bg_color, fg_color):
     window_insert.mainloop()
 
 """
-Функция для поиска нынешней даты
+Функция для поиска сегодняшней даты при помощи модудя datetime
 """
 def find_today():
     return date.today().strftime("%d.%m.%Y")
 
 """
-Функция для подсчета общего числа калорий
+Функция для подсчета калорий съеденныхх сегодня
 """
 def summ():
     connect = sqlite3.connect('archive.db') ## делаем запрос к базе данных
@@ -151,12 +149,12 @@ def summ():
     return summa
 
 """
-Окно при запуске приложения, вычисляет дневную норму ккал
+Окно для рассчета дневной нормы ккал пользователя (запускается первым при старте программы)
 """
 def ckal_calculator():
     global ckal
     """
-    Функция для подсчета нормы ккал, исходя из физических нагрузок
+    Функция для рассчета дневной нормы ккал, исходя из данных, введеннных пользователем
     """
     def calculeter():
         try:
@@ -177,7 +175,7 @@ def ckal_calculator():
         except:
             messagebox.showerror('ERROR', 'Data entered incorrectly.!')
 
-    # окно расчёта калорий
+    # интерфейс окна для рассчета дневной нормы ккал
     window_calculetor = Tk()
     window_calculetor.title('Calorie Calculation')
     window_calculetor.geometry("300x350")
@@ -271,11 +269,11 @@ def ckal_calculator():
     return ckal
 
 """ 
-Таблица при нажатии на кнопку архив
+Окно архива
 """
 def archive():
     """
-    Находит приемы пищи в нужный день
+    Находит и добавляет в таблицу продукты из базы данных архива, завписанные в день, введенный пользователем
     """
     def find_product_from_day():
         my_frame.delete(*my_frame.get_children()) ## очищает таблицу
@@ -294,7 +292,7 @@ def archive():
         else:
             messagebox.showerror('ERROR','''The value is not in the archive.
 (Check if the date is entered correctly:__.__.____ )''')## вывод ошибки
-    # окно архива
+    # интерфейс окна архива
     window_archive = Tk()
     window_archive.title("Archive")
     window_archive.geometry('350x620')
@@ -310,7 +308,7 @@ def archive():
     # окно ввода даты
     frame = Frame(window_archive)
     date_label = Label(frame, text="Date ", bg="lavender")## заголовок окна
-    date_entry = Entry(frame, width=10, textvariable=my_date)##  окно ввода
+    date_entry = Entry(frame, width=10, textvariable=my_date)## окно ввода
     # упорядочивание окна и заголовка
     date_label.pack(side=LEFT)
     date_entry.pack(side=RIGHT)
@@ -324,7 +322,7 @@ def archive():
     main_frame = Frame(window_archive)
     main_frame.pack(pady=40)
 
-    # бегунок
+    # бегунок вутри таблицы
     frame_scroll = Scrollbar(main_frame)
     frame_scroll.pack(side=RIGHT, fill=Y)
 
@@ -368,15 +366,16 @@ def archive():
     window_archive.mainloop()
 
 """
-Окна c приемами пищи
+Окно с приемом пищи. 
+Функция принимает переменные: название приема пищи, задний фон и цвет текста, в итоге получаются окна с одинаковым интерфейсом и разным дизаином
 """
-def windows(meal, bg_color, fg_color):
+def windows(meal, bg_color, fg_color): 
     """
-    Калькулятор расчета кбжу по массе
+    Калькулятор расчета кбжу по массе, введеной пользователем
     """
     def calculation(selected_products):
         calculated_selected_product = []
-        # цикл просчитывает кбжу для введенной массы
+        # цикл просчитывает массу, ккал, белки, жиры, углеводы для введенной массы
         for item in selected_products:
             if type(item) == str:
                 calculated_selected_product.append(item)
@@ -388,9 +387,9 @@ def windows(meal, bg_color, fg_color):
     Функция добавляет продукт в таблицу
     """
     def add_product():
-        connect = sqlite3.connect('n_base.db')  ## делаем запрос к базе данных
+        connect = sqlite3.connect('n_base.db') ## делаем запрос к базе данных
         cursor = connect.cursor()
-        cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [new_product_entry.get().title()])## получаем нужный продукт из БД
+        cursor.execute('''SELECT * FROM n_base WHERE name = ?''', [new_product_entry.get().title()]) ## получаем нужный продукт из БД
         try:
             calculated_selected_product = calculation(cursor.fetchone())
             connect.close()
@@ -399,19 +398,19 @@ def windows(meal, bg_color, fg_color):
             my_frame.insert(parent='', index='end', values=calculated_selected_product)
             my_frame.pack()
 
-            #очищает окно ввода
+            # очищает окно ввода
             new_product_entry.delete(0, END)  
             new_mass_entry.delete(0, END)
 
             add_product_to_base(calculated_selected_product)
 
         except:
-            res = messagebox.askquestion('ERROR!', 'Data entered incorrectly. Do you want to add your product to the database?') ## ввывод ошибки и вопроса
+            res = messagebox.askquestion('ERROR!', 'Data entered incorrectly. Do you want to add your product to the database?') ## ввывод ошибки и вопроса, если продукта нет в базе данных
             if res == 'yes':
                 open_insert_new_product(window_meal,meal,bg_color,fg_color)
 
     """
-    Функция добавляет продукт в БД
+    Функция добавляет продукт в БД архива
     """
     def add_product_to_base(calculated_selected_product):
         # добавить запись в базу данных
@@ -424,12 +423,12 @@ def windows(meal, bg_color, fg_color):
         connect = sqlite3.connect('archive.db') ## создаём соединение с архивом
         cursor = connect.cursor()
         cursor.execute('''INSERT INTO archive (date,meal,name,g,kkal,p,f,c) VALUES (?,?,?,?,?,?,?,?)''',
-                       tuple(added_calculated_selected_product))## добавление продукта в архив
+                       tuple(added_calculated_selected_product)) ## добавление продукта в архив
         connect.commit()
         connect.close()
 
    """
-   Функция удаляет продукт из таблицы
+   Функция удаляет продукт из таблицы, при помощи курсора
    """
     def delete_product():
         # захватить запись в переменную
@@ -443,17 +442,17 @@ def windows(meal, bg_color, fg_color):
         delete_product_from_base(deleted_selected_product)
 
    """
-   Функция удаляет продукт из БД
+   Функция удаляет продукт из БД архива
    """
     def delete_product_from_base(deleted_selected_product):
-        connect = sqlite3.connect('archive.db')## создаём соединения с архивом
+        connect = sqlite3.connect('archive.db') ## создаём соединения с архивом
         cursor = connect.cursor()
         cursor.execute("DELETE FROM archive WHERE name = ? AND g = ?",
-                       [deleted_selected_product[0], deleted_selected_product[1]])## удаляем продукт из архива
+                       [deleted_selected_product[0], deleted_selected_product[1]]) ## удаляем продукт из архива
         connect.commit()
         connect.close()
 
-    # таблица при нажатии на кнопку с приёмом пищи
+    # интерфейс окна с приемом пищи
     window_meal = Tk()
     window_meal.title(meal)
     window_meal.geometry('350x620')
@@ -461,14 +460,14 @@ def windows(meal, bg_color, fg_color):
     photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
     window_meal.iconphoto(False, photo)
 
-    #заголовок таблицы
+    # заголовок таблицы
     title = Label(window_meal, text=meal, bg=bg_color, fg=fg_color, font=70, width=30)
     title.pack()
 
     main_frame = Frame(window_meal)
     main_frame.pack()
 
-    # бегунок
+    # бегунок внутри таблицы
     frame_scroll = Scrollbar(main_frame)
     frame_scroll.pack(side=RIGHT, fill=Y)
 
@@ -502,7 +501,7 @@ def windows(meal, bg_color, fg_color):
     my_frame.heading("player_f", text="Fats", anchor=CENTER)
     my_frame.heading("player_c", text="Carbohydrates", anchor=CENTER)
 
-    # добавляем продукты в таблицу, добавленные ранее
+    # добавляем продукты в таблицу, добавленные ранее в этот день
     connect = sqlite3.connect('archive.db')  ## делаем запрос к базе данных
     cursor = connect.cursor()
     # получаем нужные записи из архива, передаём в переменную
@@ -552,7 +551,7 @@ def windows(meal, bg_color, fg_color):
 """
 def main():
     """ 
-    Диаграмма для сводки
+    Диаграмма для сводки, отображает отношение дневной нормы ккал пользователя и уже съеденных ккал в этот день
     """
     def diagram():
         # создание диаграммы
@@ -572,13 +571,13 @@ def main():
             canvas.get_tk_widget().pack()
             canvas.draw()
         except ValueError:
-            #  вывод ошибки при переедании 
+            #  вывод ошибки, если съеденных ккал больше нормы
             ax.pie([1, 0], 
                    colors=("lightcoral", "yellowgreen"),
                    wedgeprops=dict(width=0.5),
-                   autopct='%1.1f%%')##  данные диаграммы( диаграмма будет заполнена )
+                   autopct='%1.1f%%') ## данные диаграммы (диаграмма будет заполнена)
             ax.legend([f"Eaten:{summ()} kcal",
-                       f"Left: {0} kcal"])## легенда диаграммы
+                       f"Left: {0} kcal"]) ## легенда диаграммы
             circle = matplotlib.patches.Circle((0, 0), 0.3, color='lavender')
             ax.add_artist(circle)
             ax.axis('equal')
@@ -590,7 +589,7 @@ def main():
 
     window_main = Tk()
 
-    #иконка приложения
+    # иконка приложения
     photo = PhotoImage(file='58431506a9a7d158c60a2227.png')
     window_main.iconphoto(False, photo)
 
