@@ -38,5 +38,3 @@ def open_insert_new_product(window_meal, meal, bg_color, fg_color):
 """
 def find_today():
     return date.today().strftime("%d.%m.%Y")
-
-    
