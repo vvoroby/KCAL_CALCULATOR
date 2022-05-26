@@ -23,16 +23,16 @@
 ## Калькулятор ##
 Функция калькулятор расчивает дневную норму калорий для человека по его росту,весу,возрасту ,полу и уровню физической активности.
 
+>[калькулятор](https://github.com/vvoroby/project-2-semester/blob/main/functions/kcal_calculator.py)
+
 ![image](https://user-images.githubusercontent.com/99788525/170520179-7ab74055-8bc4-47bc-94da-ced4a266a930.png)![image](https://user-images.githubusercontent.com/99788525/170520805-d49bb12f-8d81-4b5c-93eb-c06d5165f3c4.png)
 
-![image](https://user-images.githubusercontent.com/99788525/170520918-6804f425-9d24-45d7-ae93-8d03a0f1e39d.png)
-
-
->[калькулятор](https://github.com/vvoroby/project-2-semester/blob/main/functions/kcal_calculator.py)
 ***
 ## Интерфейс ##
 У нас есть главное окошко с кнопками,которые открывают новые окна с таблицами для завтрака, обеда, ужина, перекуса. Кроме того, сверху главного окна отображается актуальная дата и имеются кнопки, открывающие архив и окно "калькулятор".
 В нижней части окна находится диаграмма, которая отображает процент употребленных калорий от общей нормы человека.
+
+![image](https://user-images.githubusercontent.com/99788525/170520918-6804f425-9d24-45d7-ae93-8d03a0f1e39d.png)
 
 ***
 ## Окна приёмов пищи ##
