@@ -60,6 +60,8 @@
 
 Если же такого продукта в базе данных нет, то появляется окошко, которое предлагает пользователю ввести новый(собственный) продукт или блюдо в базу данных.
 
+![image](https://sun9-north.userapi.com/sun9-81/s/v1/ig2/ytqybhfeNEkyytLbAYaL1it9lP-uCY0BMAMhUjY-HsrzxjHgsAlVMThvKFrWRdkwQcX8_UHNnXl55RUb5G2XpoSm.jpg?size=1129x470&quality=95&type=album)
+
 Функция для добавления нового продукта в базу данных:
 >[ввод нового продукта в БД](https://github.com/vvoroby/project-2-semester/blob/main/functions/insert_new_product.py)
 
