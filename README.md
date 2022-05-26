@@ -31,7 +31,7 @@
 >[база данных](https://github.com/vvoroby/project-2-semester/blob/main/database/n_base.db?raw=true)
 
 Вы можете самостоятельно добавить продукт в базу данных с помощью функции: 
->[функция добавления нового прдукта в БД](https://github.com/vvoroby/project-2-semester/blob/main/functions/insert_new_product.py)
+>[ввод нового продукта в БД](https://github.com/vvoroby/project-2-semester/blob/main/functions/insert_new_product.py)
 
 ***
 ## Калькулятор ##
@@ -59,7 +59,7 @@
 Если же такого продукта в базе данных нет, то появляется окошко, которое предлагает пользователю ввести новый(собственный) продукт или блюдо в базу данных.
 
 Функция для добавления нового продукта в базу данных:
->[ввод нового продукта](https://github.com/vvoroby/project-2-semester/blob/main/functions/insert_new_product.py)
+>[ввод нового продукта в БД](https://github.com/vvoroby/project-2-semester/blob/main/functions/insert_new_product.py)
 
 Кроме того, запись о продукте можно удалить из таблицы, она автоматически удалится из архива.
 
