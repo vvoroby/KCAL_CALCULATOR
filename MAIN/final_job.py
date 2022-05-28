@@ -427,9 +427,9 @@ def windows(meal, bg_color, fg_color):
         connect.commit()
         connect.close()
 
-   """
-   Функция удаляет продукт из таблицы, при помощи курсора
-   """
+    """
+    Функция удаляет продукт из таблицы, при помощи курсора
+    """
     def delete_product():
         # захватить запись в переменную
         selected = my_frame.focus()
@@ -441,9 +441,9 @@ def windows(meal, bg_color, fg_color):
 
         delete_product_from_base(deleted_selected_product)
 
-   """
-   Функция удаляет продукт из БД архива
-   """
+    """
+    Функция удаляет продукт из БД архива
+    """
     def delete_product_from_base(deleted_selected_product):
         connect = sqlite3.connect('archive.db') ## создаём соединения с архивом
         cursor = connect.cursor()
