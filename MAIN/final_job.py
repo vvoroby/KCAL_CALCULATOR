@@ -260,7 +260,7 @@ def ckal_calculator():
     ckal_label2.pack(side=LEFT)
     ckal_label3.pack(side=LEFT)
 
-    #кнопка "сохранить"
+    #кнопка "сохранить", перед этим необходимо нажать "Get to know"
     btn = Button(window_calculetor, text="Save", bg="pink", command=partial(open_main, window_calculetor))
     btn.pack(pady=30, side=TOP)
 
